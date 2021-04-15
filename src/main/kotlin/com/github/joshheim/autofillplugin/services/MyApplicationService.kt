@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.joshheim.autofillplugin.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.joshheim.autofillplugin.MyBundle
 
 class MyApplicationService {
 
