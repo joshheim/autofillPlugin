@@ -1,11 +1,15 @@
 <idea-plugin>
     <id>com.github.joshheim.autofillplugin</id>
-    <name>autofillPlugin</name>
-    <vendor>joshheim</vendor>
+    <name>AutofillPlugin</name>
+    <vendor email="joshua.heim@interligent.com">joshheim</vendor>
+    <version>0.1</version>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.php</depends>
+
+    <idea-version since-build="173.0"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.joshheim.autofillplugin.services.MyApplicationService"/>
@@ -16,4 +20,18 @@
         <listener class="com.github.joshheim.autofillplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <group id="autofillPlugin.FillAction" text="Fill" description="Fill">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <action class="com.github.joshheim.autofillplugin.FillAction" id="AutofillPlugin.Actions.FillAction"
+                    text="Hello"/>
+        </group>
+        <action id="autofillPlugin.GetSettersActionClass" class="com.github.joshheim.autofillplugin.GetSettersActionClass" text="Get Setters"
+                description="Generate all Setters for chosen Var">
+            <add-to-group group-id="PhpGenerateGroup" anchor="last"/>
+            <keyboard-shortcut first-keystroke="shift ctrl NUMPAD1" keymap="$default"/>
+
+        </action>
+    </actions>
 </idea-plugin>
