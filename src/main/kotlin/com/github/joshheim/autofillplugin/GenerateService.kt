@@ -16,6 +16,8 @@ import com.jetbrains.php.lang.psi.elements.impl.PhpClassImpl
 
 class GenerateService {
     fun generateMethods(event: AnActionEvent, typeOfMethod: String?) {
+        // Ab hier der teil in dem der variablenname erfasst wird
+        // Aktuell noch durch markieren mit dem Cursor, aber im Aufruf wird schon mit der Liste gearbeitet
         val project: Project? = event.getData(PlatformDataKeys.PROJECT)
         val editor: Editor? = event.getData(PlatformDataKeys.EDITOR)
         if (editor != null) {
@@ -31,6 +33,8 @@ class GenerateService {
                             val selectedElementClass: MutableCollection<PsiElement?> = SmartList()
                             assignmentExpression.accept(object : PsiRecursiveElementVisitor() {
                                 override fun visitElement(psiElement: PsiElement) {
+                                    // hier mird die variable als 2 verschiedene Typen angegeben und ich weiss nicht wie ich das ordentlich beheben kann
+                                    // In Java geht das wohl
                                     if (psiElement is ClassReferenceImpl && psiElement.reference != null) {
                                         selectedElementClass.add(psiElement.reference!!.resolve())
                                     }
@@ -38,6 +42,10 @@ class GenerateService {
                                 }
                             })
 
+                            // Erfassen ENDE
+
+                            // Ab hier werden die Methoden erstellt
+                            // Aktuell nur in der offenen datei, ich hab keine Möglichkeit gefunden, wie man auf andere Dateien (in diesem Fall die Factory) zugreift
                             val document: Document = editor.document
                             var firstMethodGeneration = true
                             for (initClass in selectedElementClass) {

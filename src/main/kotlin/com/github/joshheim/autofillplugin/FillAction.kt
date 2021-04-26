@@ -16,6 +16,7 @@ class FillAction : AnAction() {
         val document: Document = editor!!.document
         val phpClass: PhpClassImpl = document as PhpClassImpl
 
+        // Hier soll die Liste mit den variablen erstellt werden, ist aber wie alles andere auch nicht getestet
         val autofillPopupList = AutofillPopupList("Fill", mutableListOf(phpClass.attributes.toString()).toTypedArray())
 
         if (e.project != null){
